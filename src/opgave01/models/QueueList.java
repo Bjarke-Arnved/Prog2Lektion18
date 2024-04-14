@@ -22,12 +22,13 @@ public class QueueList<E> implements Queue<E> {
     @Override
     public E remove() {
         // The first person is not beeing removed.
+        Node<E> node = tail;
+        Node<E> priorNode = null;
+
         if(size == 0) {
             throw new NoSuchElementException("The queue is empty");
         }
         else {
-            Node<E> node = tail;
-            Node<E> priorNode = null;
             while(node.getNext().getElement() != null) {
                 priorNode = node;
                 node = node.getNext();
@@ -35,12 +36,19 @@ public class QueueList<E> implements Queue<E> {
             priorNode.setNext(head);
             size--;
         }
-        return null;
+        return node.getElement();
     }
 
     @Override
     public E element() {
-        return null;
+        Node<E> node = tail;
+        while(node.getNext().getElement() != null) {
+            node = node.getNext();
+        }
+        if(isEmpty()) {
+            throw new NoSuchElementException("The queue is empty");
+        }
+        return node.getElement();
     }
 
     @Override
