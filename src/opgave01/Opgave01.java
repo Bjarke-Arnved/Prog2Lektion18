@@ -9,5 +9,7 @@ public class Opgave01 {
         queue.add("Gretel");
         queue.add("Witch");
         queue.add("Hunter");
+        queue.remove();
+        queue.add("King");
     }
 }

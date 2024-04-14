@@ -1,5 +1,7 @@
 package opgave01.models;
 
+import java.util.NoSuchElementException;
+
 public class QueueList<E> implements Queue<E> {
     int size;
     Node<E> head;
@@ -19,6 +21,20 @@ public class QueueList<E> implements Queue<E> {
 
     @Override
     public E remove() {
+        // The first person is not beeing removed.
+        if(size == 0) {
+            throw new NoSuchElementException("The queue is empty");
+        }
+        else {
+            Node<E> node = tail;
+            Node<E> priorNode = null;
+            while(node.getNext().getElement() != null) {
+                priorNode = node;
+                node = node.getNext();
+            }
+            priorNode.setNext(head);
+            size--;
+        }
         return null;
     }
 
@@ -29,7 +45,7 @@ public class QueueList<E> implements Queue<E> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
